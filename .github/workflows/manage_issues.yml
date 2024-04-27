@@ -1,14 +1,13 @@
-name: Manage Issues
-
-on:
-  issues:
-    types: [ labeled, unlabeled ]
-
 jobs:
   labels:
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
     steps:
-      - uses: FabricMC/fabric-action-scripts@v2
-        with:
-          context: ${{ github.event.action }}
-          label: ${{ github.event.label.name }}
+    - continue-on-error: true
+      uses: FabricMC/fabric-action-scripts@v2
+      with:
+        context: ${{ github.event.action }}
+        label: ${{ github.event.label.name }}
+name: Manage Issues
+on:
+  repository_dispatch:
+    types: trigger-ga___manage_issues.yml
